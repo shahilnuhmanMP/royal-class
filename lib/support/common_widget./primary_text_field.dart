@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:royal_class_app/app_theme.dart';
+import 'package:royal_class_app/support/app_theme.dart';
 
 class InputText extends StatefulWidget {
   final bool? isObscure;

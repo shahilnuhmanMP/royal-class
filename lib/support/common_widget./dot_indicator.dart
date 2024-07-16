@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:royal_class_app/app_theme.dart';
+import 'package:royal_class_app/support/app_theme.dart';
 
 class DotIndicator extends StatelessWidget {
   final int pageIndex;
@@ -28,7 +28,9 @@ class DotIndicator extends StatelessWidget {
             width: pageIndex == i ? activeWidth : width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
-              color: colors(context).text!.withOpacity(0.5),
+              color: pageIndex == i
+                  ? Colors.white
+                  : colors(context).text!.withOpacity(0.5),
             ),
           );
         },

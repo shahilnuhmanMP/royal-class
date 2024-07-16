@@ -13,7 +13,7 @@ ThemeData getAppTheme(BuildContext context, bool isDarkTheme) {
                 isDarkTheme ? const Color(0xff181A21) : Color(0xff242C3B),
             background:
                 isDarkTheme ? const Color(0xff181A21) : Color(0xff353F54),
-            primary: Colors.black,
+            primary: Color(0xFF34C8E8),
             text: isDarkTheme ? Colors.white : Colors.white,
             description: isDarkTheme ? Colors.white : Colors.white,
             cardgrey: isDarkTheme ? Colors.black : const Color(0xffF1F1F1),

@@ -2,26 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:royal_class_app/app_theme.dart';
+import 'package:royal_class_app/support/app_theme.dart';
 
 class BottomNavigation extends StatelessWidget {
   final String activeIcon;
   BottomNavigation({Key? key, this.activeIcon = ''}) : super(key: key);
 
+  ValueNotifier<String> activeIcone = ValueNotifier("");
+
   @override
   Widget build(BuildContext context) {
+    activeIcone.value = activeIcon;
     return Stack(
       children: [
         Container(
             height: 100,
             width: double.infinity,
             decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.transparent,
+                  colors(context).shadowColor!,
+                ],
+                stops: [0.0, 1.0],
+              ),
               boxShadow: [
                 BoxShadow(
                   color: colors(context).shadowColor!,
                   spreadRadius: 15,
                   blurRadius: 10,
-                  offset: Offset(0, 10), // Shadow position, bottom
+                  offset: Offset(0, 10),
                 ),
               ],
             ),
@@ -40,8 +52,7 @@ class BottomNavigation extends StatelessWidget {
                 isActive: activeIcon == "cycle",
                 onTap: () {
                   HapticFeedback.lightImpact();
-                  // Navigator.pushAndRemoveUntil(
-                  //     context, HomeScreenPage.route(), (route) => false);
+                  activeIcone.value = "cycle";
                 },
               ),
               BottomNavigationIcon(
@@ -50,8 +61,7 @@ class BottomNavigation extends StatelessWidget {
                 isActive: activeIcon == "map",
                 onTap: () {
                   HapticFeedback.lightImpact();
-                  // Navigator.pushAndRemoveUntil(
-                  //     context, HomeScreenPage.route(), (route) => false);
+                  activeIcone.value = "map";
                 },
               ),
               BottomNavigationIcon(
@@ -60,8 +70,7 @@ class BottomNavigation extends StatelessWidget {
                 isActive: activeIcon == "map",
                 onTap: () {
                   HapticFeedback.lightImpact();
-                  // Navigator.pushAndRemoveUntil(
-                  //     context, HomeScreenPage.route(), (route) => false);
+                  activeIcone.value = "cart";
                 },
               ),
               BottomNavigationIcon(
@@ -70,120 +79,135 @@ class BottomNavigation extends StatelessWidget {
                 isActive: activeIcon == "person",
                 onTap: () {
                   HapticFeedback.lightImpact();
-                  // Navigator.pushAndRemoveUntil(
-                  //     context, OffersPage.route(), (route) => false);
+                  activeIcone.value = "person";
                 },
               ),
-              Consumer(builder: (context, ref, child) {
-                return BottomNavigationIcon(
-                  iconLabel: "doc",
-                  iconData: "assets/images/doc.png",
-                  isActive: activeIcon == "doc",
-                  onTap: () {
-                    // Navigator.pushAndRemoveUntil(
-                    //     context, SettingPage.route(), (route) => false);
-                  },
-                );
-              }),
+              BottomNavigationIcon(
+                iconLabel: "doc",
+                iconData: "assets/images/doc.png",
+                isActive: activeIcon == "doc",
+                onTap: () {
+                  HapticFeedback.lightImpact();
+                  activeIcone.value = "doc";
+                },
+              ),
             ],
           ),
         ),
-        Container(
-          height: 100,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  width: 70,
-                  height: 60,
-                  child: activeIcon == "cycle"
-                      ? Stack(
-                          children: [
-                            Image.asset("assets/images/active.png"),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Image.asset(
-                                "assets/images/cycle.png",
-                                height: 20,
-                              ),
-                            )
-                          ],
-                        )
-                      : Container()),
-              Container(
-                  width: 70,
-                  height: 60,
-                  child: activeIcon == "1"
-                      ? Stack(
-                          children: [
-                            Image.asset("assets/images/active.png"),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Image.asset(
-                                "assets/images/cycle.png",
-                                height: 20,
-                              ),
-                            )
-                          ],
-                        )
-                      : Container()),
-              Container(
-                  width: 70,
-                  height: 60,
-                  child: activeIcon == "1"
-                      ? Stack(
-                          children: [
-                            Image.asset("assets/images/active.png"),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Image.asset(
-                                "assets/images/cycle.png",
-                                height: 20,
-                              ),
-                            )
-                          ],
-                        )
-                      : Container()),
-              Container(
-                  width: 70,
-                  height: 60,
-                  child: activeIcon == "1"
-                      ? Stack(
-                          children: [
-                            Image.asset("assets/images/active.png"),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Image.asset(
-                                "assets/images/cycle.png",
-                                height: 20,
-                              ),
-                            )
-                          ],
-                        )
-                      : Container()),
-              Container(
-                  width: 70,
-                  height: 60,
-                  child: activeIcon == "1"
-                      ? Stack(
-                          children: [
-                            Image.asset("assets/images/active.png"),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Image.asset(
-                                "assets/images/cycle.png",
-                                height: 20,
-                              ),
-                            )
-                          ],
-                        )
-                      : Container()),
-            ],
-          ),
-        )
+        _activeNavBar(activeIcone: activeIcone)
       ],
     );
+  }
+}
+
+class _activeNavBar extends StatelessWidget {
+  const _activeNavBar({
+    super.key,
+    required this.activeIcone,
+  });
+
+  final ValueNotifier<String> activeIcone;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+        valueListenable: activeIcone,
+        builder: (context, val, child) {
+          return Container(
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    width: 70,
+                    height: 60,
+                    child: activeIcone.value == "cycle"
+                        ? Stack(
+                            children: [
+                              Image.asset("assets/images/active.png"),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  "assets/images/cycle.png",
+                                  height: 20,
+                                ),
+                              )
+                            ],
+                          )
+                        : Container()),
+                Container(
+                    width: 70,
+                    height: 60,
+                    child: activeIcone.value == "map"
+                        ? Stack(
+                            children: [
+                              Image.asset("assets/images/active.png"),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  "assets/images/map.png",
+                                  height: 20,
+                                ),
+                              )
+                            ],
+                          )
+                        : Container()),
+                Container(
+                    width: 70,
+                    height: 60,
+                    child: activeIcone.value == "cart"
+                        ? Stack(
+                            children: [
+                              Image.asset("assets/images/active.png"),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  "assets/images/cart.png",
+                                  height: 20,
+                                ),
+                              )
+                            ],
+                          )
+                        : Container()),
+                Container(
+                    width: 70,
+                    height: 60,
+                    child: activeIcone.value == "person"
+                        ? Stack(
+                            children: [
+                              Image.asset("assets/images/active.png"),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  "assets/images/person.png",
+                                  height: 20,
+                                ),
+                              )
+                            ],
+                          )
+                        : Container()),
+                Container(
+                    width: 70,
+                    height: 60,
+                    child: activeIcone.value == "doc"
+                        ? Stack(
+                            children: [
+                              Image.asset("assets/images/active.png"),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  "assets/images/doc.png",
+                                  height: 20,
+                                ),
+                              )
+                            ],
+                          )
+                        : Container()),
+              ],
+            ),
+          );
+        });
   }
 }
 

@@ -14,19 +14,16 @@ class CategoryRepository {
 
       if (response.statusCode == 200) {
         List jsonResponse = json.decode(response.body);
-        print(jsonResponse);
-        categories = jsonResponse as List<CategoryModel>;
+        categories = jsonResponse
+            .map((item) => CategoryModel.fromJson(item as Map<String, dynamic>))
+            .toList();
       } else {
         print('Failed to load categories: ${response.statusCode}');
       }
     } catch (error) {
       print('Server Error: $error');
     }
-    print(categories);
-    return categories.isNotEmpty
-        ? categories
-            .map((item) => CategoryModel.fromJson(item as Map<String, dynamic>))
-            .toList()
-        : [];
+    // print(categories);
+    return categories;
   }
 }

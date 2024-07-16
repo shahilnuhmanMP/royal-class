@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:royal_class_app/app_theme.dart';
+import 'package:royal_class_app/support/app_theme.dart';
 import 'package:royal_class_app/modules/home/view/homePage.dart';
 import 'package:royal_class_app/support/common_widget./bottom_nav_bar_widget.dart';
 import 'package:royal_class_app/support/common_widget./primary_button.dart';
