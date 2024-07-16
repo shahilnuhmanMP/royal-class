@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:royal_class_app/modules/home/riverpod/provider/product_provider.dart';
+import 'package:royal_class_app/modules/home/widget/shimmering_category.dart';
+import 'package:royal_class_app/modules/home/widget/shimmering_product_widget.dart';
 import 'package:royal_class_app/support/app_theme.dart';
 import 'package:royal_class_app/modules/home/riverpod/provider/category_provider.dart';
 import 'package:royal_class_app/modules/home/widget/category_widget.dart';
@@ -28,21 +30,7 @@ class HomeScreenPage extends ConsumerWidget {
       children: [
         Container(
           color: colors(context).background,
-          child: Stack(
-            children: [
-              Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Image.asset("assets/images/BG.png")),
-              ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                  child: Container(
-                    color: Colors.black.withOpacity(0.1),
-                  ),
-                ),
-              )
-            ],
-          ),
+          child: HomeBackground(),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
@@ -69,45 +57,7 @@ class HomeScreenPage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 250,
-                    width: double.infinity,
-                    child: Stack(
-                      children: [
-                        Opacity(
-                          opacity: 0.6,
-                          child: Image.asset(
-                            "assets/images/topCard.png",
-                            fit: BoxFit.contain,
-                            width: double.infinity,
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Center(
-                                child: Image.asset(
-                                  "assets/images/cycleImage.png",
-                                  height: 100,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 30.0, bottom: 40),
-                              child: Text(
-                                "30% off",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Section title: Categories
+                  TopCard(),
 
                   // Category list widget
                   ValueListenableBuilder(
@@ -123,7 +73,7 @@ class HomeScreenPage extends ConsumerWidget {
                           }, error: (e, s) {
                             return SizedBox();
                           }, loading: () {
-                            return SizedBox();
+                            return ShimmeringCategory();
                           }),
                         );
                       }),
@@ -137,13 +87,85 @@ class HomeScreenPage extends ConsumerWidget {
                       }, error: (e, s) {
                         return SizedBox();
                       }, loading: () {
-                        return SizedBox();
+                        return ShimmerProductWidget();
                       }))
                 ],
               ),
             ),
           ),
         ),
+      ],
+    );
+  }
+}
+
+class TopCard extends StatelessWidget {
+  const TopCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 250,
+      width: double.infinity,
+      child: Stack(
+        children: [
+          Opacity(
+            opacity: 0.6,
+            child: Image.asset(
+              "assets/images/topCard.png",
+              fit: BoxFit.contain,
+              width: double.infinity,
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Center(
+                  child: Image.asset(
+                    "assets/images/cycleImage.png",
+                    height: 100,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0, bottom: 40),
+                child: Text(
+                  "30% off",
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeBackground extends StatelessWidget {
+  const HomeBackground({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: Image.asset("assets/images/BG.png")),
+        ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+            child: Container(
+              color: Colors.black.withOpacity(0.1),
+            ),
+          ),
+        )
       ],
     );
   }

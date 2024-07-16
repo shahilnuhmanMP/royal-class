@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:royal_class_app/modules/home/model/product.dart';
 import 'package:royal_class_app/support/app_theme.dart';
-import 'package:royal_class_app/modules/home/view/product_details_page.dart';
+import 'package:royal_class_app/modules/product/view/product_details_page.dart';
 import 'dart:math' as math;
 
 class ProductListWidget extends StatelessWidget {

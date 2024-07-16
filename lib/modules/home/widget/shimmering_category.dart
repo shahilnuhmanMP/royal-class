@@ -11,7 +11,6 @@ class ShimmeringCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(categoryList.length);
     return SizedBox(
         height: 70,
         child: ListView(
