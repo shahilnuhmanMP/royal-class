@@ -1,19 +1,59 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:royal_class_app/support/app_theme.dart';
 import 'package:royal_class_app/modules/home/view/homePage.dart';
+import 'package:royal_class_app/support/auth.dart';
 import 'package:royal_class_app/support/common_widget./primary_button.dart';
 import 'package:royal_class_app/support/common_widget./primary_text_field.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String? errormessage;
+  bool isLogin = true;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  signInwithUserEmailAndPassword() async {
+    try {
+      await Auth().signInWithUserEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errormessage = e.message;
+      });
+    }
+  }
+
+  createwithUserEmailAndPassword() async {
+    try {
+      await Auth().createUserEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errormessage = e.message;
+      });
+    }
+  }
+
+  Widget _errorMessage() {
+    return Text(errormessage ?? "");
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -100,7 +140,10 @@ class LoginPage extends StatelessWidget {
                             color: colors(context).black,
                             text: "Login",
                             onPressed: () {
-                              Navigator.push(context, HomeScreenPage.route());
+                              isLogin
+                                  ? signInwithUserEmailAndPassword
+                                  : createwithUserEmailAndPassword;
+                              // Navigator.push(context, HomeScreenPage.route());
                             }),
                       )
                     ]),

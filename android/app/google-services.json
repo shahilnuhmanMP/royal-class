@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "587415868465",
+    "project_id": "royal-class-e53ac",
+    "storage_bucket": "royal-class-e53ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587415868465:android:1dc665436597244a73b110",
+        "android_client_info": {
+          "package_name": "com.example.royal_class_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwsI4jVRF6k35GpwASwJPqYFrabjPyY1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
