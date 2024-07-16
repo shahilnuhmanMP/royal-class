@@ -42,69 +42,6 @@ class ShimmerProductWidget extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.fill,
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //       horizontal: 10, vertical: 10),
-                  //   child: Column(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Expanded(
-                  //         child: Center(
-                  //           child: ClipRRect(
-                  //             borderRadius: BorderRadius.circular(10),
-                  //             child: Container(
-                  //               decoration: BoxDecoration(
-                  //                 borderRadius: BorderRadius.circular(16),
-                  //                 color:
-                  //                     colors(context).primary!.withOpacity(0.2),
-                  //               ),
-                  //               // child: Image.network(
-                  //               //     productlist[index].images?[0] ?? "",
-                  //               //     fit: BoxFit.cover,
-                  //               //     height: 50,
-                  //               //     errorBuilder: (context, error, stackTrace) {
-                  //               //   return Image.asset(
-                  //               //     'assets/images/cart.png',
-                  //               //     fit: BoxFit.fill,
-                  //               //     height: 24,
-                  //                 // );
-                  //               // }),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //       Text("",
-                  //           overflow: TextOverflow.ellipsis,
-                  //           maxLines: 2,
-                  //           textAlign: TextAlign.left,
-                  //           style: GoogleFonts.poppins(
-                  //             textStyle: TextStyle(
-                  //               fontWeight: FontWeight.w700,
-                  //               color: colors(context).text,
-                  //             ),
-                  //           )),
-                  //       Text(
-                  //         productlist[index].description ?? "",
-                  //         overflow: TextOverflow.ellipsis,
-                  //         maxLines: 1,
-                  //         textAlign: TextAlign.left,
-                  //         style: TextStyle(
-                  //           color: colors(context).text,
-                  //         ),
-                  //       ),
-                  //       Padding(
-                  //         padding: const EdgeInsets.only(bottom: 10),
-                  //         child: Text("AED ${productlist[index].price}",
-                  //             style: GoogleFonts.poppins(
-                  //               textStyle: TextStyle(
-                  //                   fontWeight: FontWeight.bold,
-                  //                   color: colors(context).text),
-                  //             )),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ),
